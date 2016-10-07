@@ -13,11 +13,11 @@
 		3647AFA61B335D5500EF10D4 /* DVR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3647AF9B1B335D5500EF10D4 /* DVR.framework */; };
 		3647AFBA1B335E4A00EF10D4 /* Cassette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB51B335E4A00EF10D4 /* Cassette.swift */; };
 		3647AFBB1B335E4A00EF10D4 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB61B335E4A00EF10D4 /* Interaction.swift */; };
-		3647AFBC1B335E4A00EF10D4 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB71B335E4A00EF10D4 /* URLRequest.swift */; };
+		3647AFBC1B335E4A00EF10D4 /* URLRequest_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB71B335E4A00EF10D4 /* URLRequest_Extension.swift */; };
 		3647AFBD1B335E4A00EF10D4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB81B335E4A00EF10D4 /* Session.swift */; };
 		3647AFBE1B335E4A00EF10D4 /* SessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB91B335E4A00EF10D4 /* SessionDataTask.swift */; };
-		3647AFC01B33602A00EF10D4 /* URLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFBF1B33602A00EF10D4 /* URLResponse.swift */; };
-		3647AFC21B3363C400EF10D4 /* URLHTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFC11B3363C400EF10D4 /* URLHTTPResponse.swift */; };
+		3647AFC01B33602A00EF10D4 /* URLResponse_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFBF1B33602A00EF10D4 /* URLResponse_Extension.swift */; };
+		3647AFC21B3363C400EF10D4 /* HTTPURLResponse_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFC11B3363C400EF10D4 /* HTTPURLResponse_Extension.swift */; };
 		3647AFCD1B33689000EF10D4 /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFCB1B33689000EF10D4 /* SessionTests.swift */; };
 		3690A0851B33AA3C00731222 /* DVR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3690A07B1B33AA3B00731222 /* DVR.framework */; };
 		3690A0921B33AA9400731222 /* DVR.h in Headers */ = {isa = PBXBuildFile; fileRef = 3647AF9E1B335D5500EF10D4 /* DVR.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,17 +25,17 @@
 		3690A0941B33AA9400731222 /* SessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB91B335E4A00EF10D4 /* SessionDataTask.swift */; };
 		3690A0951B33AA9400731222 /* Cassette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB51B335E4A00EF10D4 /* Cassette.swift */; };
 		3690A0961B33AA9400731222 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB61B335E4A00EF10D4 /* Interaction.swift */; };
-		3690A0971B33AA9400731222 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB71B335E4A00EF10D4 /* URLRequest.swift */; };
-		3690A0981B33AA9400731222 /* URLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFBF1B33602A00EF10D4 /* URLResponse.swift */; };
-		3690A0991B33AA9400731222 /* URLHTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFC11B3363C400EF10D4 /* URLHTTPResponse.swift */; };
+		3690A0971B33AA9400731222 /* URLRequest_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB71B335E4A00EF10D4 /* URLRequest_Extension.swift */; };
+		3690A0981B33AA9400731222 /* URLResponse_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFBF1B33602A00EF10D4 /* URLResponse_Extension.swift */; };
+		3690A0991B33AA9400731222 /* HTTPURLResponse_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFC11B3363C400EF10D4 /* HTTPURLResponse_Extension.swift */; };
 		3690A09A1B33AA9400731222 /* DVR.h in Headers */ = {isa = PBXBuildFile; fileRef = 3647AF9E1B335D5500EF10D4 /* DVR.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3690A09B1B33AA9400731222 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB81B335E4A00EF10D4 /* Session.swift */; };
 		3690A09C1B33AA9400731222 /* SessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB91B335E4A00EF10D4 /* SessionDataTask.swift */; };
 		3690A09D1B33AA9400731222 /* Cassette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB51B335E4A00EF10D4 /* Cassette.swift */; };
 		3690A09E1B33AA9400731222 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB61B335E4A00EF10D4 /* Interaction.swift */; };
-		3690A09F1B33AA9400731222 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB71B335E4A00EF10D4 /* URLRequest.swift */; };
-		3690A0A01B33AA9400731222 /* URLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFBF1B33602A00EF10D4 /* URLResponse.swift */; };
-		3690A0A11B33AA9400731222 /* URLHTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFC11B3363C400EF10D4 /* URLHTTPResponse.swift */; };
+		3690A09F1B33AA9400731222 /* URLRequest_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFB71B335E4A00EF10D4 /* URLRequest_Extension.swift */; };
+		3690A0A01B33AA9400731222 /* URLResponse_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFBF1B33602A00EF10D4 /* URLResponse_Extension.swift */; };
+		3690A0A11B33AA9400731222 /* HTTPURLResponse_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFC11B3363C400EF10D4 /* HTTPURLResponse_Extension.swift */; };
 		3690A0A21B33AA9E00731222 /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3647AFCB1B33689000EF10D4 /* SessionTests.swift */; };
 		3AA8597C1B473EB500B66772 /* DataSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8597B1B473EB500B66772 /* DataSerialization.swift */; };
 		3AA8597D1B473EB500B66772 /* DataSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8597B1B473EB500B66772 /* DataSerialization.swift */; };
@@ -70,11 +70,11 @@
 		3647AFA51B335D5500EF10D4 /* DVRTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DVRTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3647AFB51B335E4A00EF10D4 /* Cassette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cassette.swift; sourceTree = "<group>"; };
 		3647AFB61B335E4A00EF10D4 /* Interaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interaction.swift; sourceTree = "<group>"; };
-		3647AFB71B335E4A00EF10D4 /* URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		3647AFB71B335E4A00EF10D4 /* URLRequest_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequest_Extension.swift; sourceTree = "<group>"; };
 		3647AFB81B335E4A00EF10D4 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		3647AFB91B335E4A00EF10D4 /* SessionDataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDataTask.swift; sourceTree = "<group>"; };
-		3647AFBF1B33602A00EF10D4 /* URLResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLResponse.swift; sourceTree = "<group>"; };
-		3647AFC11B3363C400EF10D4 /* URLHTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLHTTPResponse.swift; sourceTree = "<group>"; };
+		3647AFBF1B33602A00EF10D4 /* URLResponse_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLResponse_Extension.swift; sourceTree = "<group>"; };
+		3647AFC11B3363C400EF10D4 /* HTTPURLResponse_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPURLResponse_Extension.swift; sourceTree = "<group>"; };
 		3647AFC81B33688A00EF10D4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3647AFCB1B33689000EF10D4 /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
 		3647AFCC1B33689000EF10D4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -156,9 +156,9 @@
 				3647AFB61B335E4A00EF10D4 /* Interaction.swift */,
 				3647AFB81B335E4A00EF10D4 /* Session.swift */,
 				3647AFB91B335E4A00EF10D4 /* SessionDataTask.swift */,
-				3647AFC11B3363C400EF10D4 /* URLHTTPResponse.swift */,
-				3647AFB71B335E4A00EF10D4 /* URLRequest.swift */,
-				3647AFBF1B33602A00EF10D4 /* URLResponse.swift */,
+				3647AFC11B3363C400EF10D4 /* HTTPURLResponse_Extension.swift */,
+				3647AFB71B335E4A00EF10D4 /* URLRequest_Extension.swift */,
+				3647AFBF1B33602A00EF10D4 /* URLResponse_Extension.swift */,
 				3647AFC71B33688A00EF10D4 /* Resources */,
 				3647AFCA1B33689000EF10D4 /* Tests */,
 			);
@@ -321,14 +321,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Venmo;
 				TargetAttributes = {
 					3647AF9A1B335D5500EF10D4 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					3647AFA41B335D5500EF10D4 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					3690A06D1B33AA0900731222 = {
 						CreatedOnToolsVersion = 7.0;
@@ -407,14 +409,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3647AFC01B33602A00EF10D4 /* URLResponse.swift in Sources */,
+				3647AFC01B33602A00EF10D4 /* URLResponse_Extension.swift in Sources */,
 				3647AFBE1B335E4A00EF10D4 /* SessionDataTask.swift in Sources */,
 				3AA8597C1B473EB500B66772 /* DataSerialization.swift in Sources */,
 				3647AFBD1B335E4A00EF10D4 /* Session.swift in Sources */,
-				3647AFBC1B335E4A00EF10D4 /* URLRequest.swift in Sources */,
+				3647AFBC1B335E4A00EF10D4 /* URLRequest_Extension.swift in Sources */,
 				3647AFBB1B335E4A00EF10D4 /* Interaction.swift in Sources */,
 				3647AFBA1B335E4A00EF10D4 /* Cassette.swift in Sources */,
-				3647AFC21B3363C400EF10D4 /* URLHTTPResponse.swift in Sources */,
+				3647AFC21B3363C400EF10D4 /* HTTPURLResponse_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,11 +437,11 @@
 				3690A09E1B33AA9400731222 /* Interaction.swift in Sources */,
 				3690A09D1B33AA9400731222 /* Cassette.swift in Sources */,
 				3AA8597D1B473EB500B66772 /* DataSerialization.swift in Sources */,
-				3690A0A01B33AA9400731222 /* URLResponse.swift in Sources */,
+				3690A0A01B33AA9400731222 /* URLResponse_Extension.swift in Sources */,
 				3690A09B1B33AA9400731222 /* Session.swift in Sources */,
 				3690A09C1B33AA9400731222 /* SessionDataTask.swift in Sources */,
-				3690A09F1B33AA9400731222 /* URLRequest.swift in Sources */,
-				3690A0A11B33AA9400731222 /* URLHTTPResponse.swift in Sources */,
+				3690A09F1B33AA9400731222 /* URLRequest_Extension.swift in Sources */,
+				3690A0A11B33AA9400731222 /* HTTPURLResponse_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,11 +452,11 @@
 				3690A0961B33AA9400731222 /* Interaction.swift in Sources */,
 				3690A0951B33AA9400731222 /* Cassette.swift in Sources */,
 				3AA8597E1B473EB500B66772 /* DataSerialization.swift in Sources */,
-				3690A0981B33AA9400731222 /* URLResponse.swift in Sources */,
+				3690A0981B33AA9400731222 /* URLResponse_Extension.swift in Sources */,
 				3690A0931B33AA9400731222 /* Session.swift in Sources */,
 				3690A0941B33AA9400731222 /* SessionDataTask.swift in Sources */,
-				3690A0971B33AA9400731222 /* URLRequest.swift in Sources */,
-				3690A0991B33AA9400731222 /* URLHTTPResponse.swift in Sources */,
+				3690A0971B33AA9400731222 /* URLRequest_Extension.swift in Sources */,
+				3690A0991B33AA9400731222 /* HTTPURLResponse_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,8 +500,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -547,8 +551,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -568,6 +574,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -579,6 +586,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -590,6 +598,7 @@
 				PRODUCT_NAME = DVR;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -597,6 +606,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -607,6 +617,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.DVR;
 				PRODUCT_NAME = DVR;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -619,6 +630,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.DVR.iostests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -630,12 +642,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.DVR.iostests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		3690A0741B33AA0900731222 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -655,6 +669,7 @@
 		3690A0751B33AA0900731222 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

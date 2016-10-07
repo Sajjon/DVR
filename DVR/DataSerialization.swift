@@ -18,40 +18,46 @@ enum SerializationFormat: String {
 // Body data serialization
 class DataSerialization {
     
-    static func serializeBodyData(data: NSData, contentType: String?) -> (format: SerializationFormat, object: AnyObject) {
+    static func serializeBodyData(_ data: Data, contentType: String?) -> (format: SerializationFormat, object: Any) {
         
         //JSON
-        if let contentType = contentType where contentType.hasPrefix("application/json") {
+        if let contentType = contentType , contentType.hasPrefix("application/json") {
             do {
-                let json = try NSJSONSerialization.JSONObjectWithData(data, options: [.AllowFragments])
+                let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments])
                 return (format: .JSON, json)
             } catch { /* nope, not a valid json. nevermind. */ }
         }
         
         //Plain Text
-        if let contentType = contentType where contentType.hasPrefix("text") {
-            if let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
+        if let contentType = contentType , contentType.hasPrefix("text") {
+            if let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
                 return (format: .PlainText, object: string)
             }
         }
         
         //nope, might be image data or something else
         //no prettier representation, fall back to base64 string
-        let string = data.base64EncodedStringWithOptions([])
+        let string = data.base64EncodedString(options: [])
         return (format: .Base64String, object: string)
     }
     
-    static func deserializeBodyData(format: SerializationFormat, object: AnyObject) -> NSData {
+    static func deserializeBodyData(_ format: SerializationFormat, object: Any) -> Data {
         
         switch format {
         case .JSON:
             do {
-                return try NSJSONSerialization.dataWithJSONObject(object, options: [])
+                return try JSONSerialization.data(withJSONObject: object, options: [])
             } catch { fatalError("Failed to convert JSON object \(object) into data") }
         case .PlainText:
-            return (object as! String).dataUsingEncoding(NSUTF8StringEncoding)!
+            return (object as! String).data(using: String.Encoding.utf8)!
         case .Base64String:
-            return NSData(base64EncodedString: object as! String, options: [])!
+            if let base64String = object as? String {
+                return Data(base64Encoded: base64String, options: .ignoreUnknownCharacters)!
+            } else if let base64Data = object as? Data {
+                return Data(base64Encoded: base64Data, options: .ignoreUnknownCharacters)!
+            } else {
+                fatalError("fail")
+            }
         }
     }
     

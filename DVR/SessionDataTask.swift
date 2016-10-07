@@ -1,17 +1,17 @@
 import Foundation
 
-class SessionDataTask: NSURLSessionDataTask {
+class SessionDataTask: URLSessionDataTask {
 
     // MARK: - Properties
 
     weak var session: Session!
-    let request: NSURLRequest
-    let completion: ((NSData?, NSURLResponse?, NSError?) -> Void)?
+    let request: URLRequest
+    let completion: ((Data?, Foundation.URLResponse?, NSError?) -> Void)?
 
 
     // MARK: - Initializers
 
-    init(session: Session, request: NSURLRequest, completion: ((NSData?, NSURLResponse?, NSError?) -> Void)? = nil) {
+    init(session: Session, request: URLRequest, completion: ((Data?, Foundation.URLResponse?, NSError?) -> Void)? = nil) {
         self.session = session
         self.request = request
         self.completion = completion
@@ -44,15 +44,15 @@ class SessionDataTask: NSURLSessionDataTask {
 		}
 
         // Create directory
-        let outputDirectory = (session.outputDirectory as NSString).stringByExpandingTildeInPath
-        let fileManager = NSFileManager.defaultManager()
-        if !fileManager.fileExistsAtPath(outputDirectory) {
-            try! fileManager.createDirectoryAtPath(outputDirectory, withIntermediateDirectories: true, attributes: nil)
+        let outputDirectory = (session.outputDirectory as NSString).expandingTildeInPath
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: outputDirectory) {
+            try! fileManager.createDirectory(atPath: outputDirectory, withIntermediateDirectories: true, attributes: nil)
         }
 
         print("[DVR] Recording '\(session.cassetteName)'")
 
-        let task = session.backingSession.dataTaskWithRequest(request) { data, response, error in
+        let task = session.backingSession.dataTask(with: request, completionHandler: { data, response, error in
             
             //Ensure we have a response
             guard let response = response else {
@@ -65,9 +65,9 @@ class SessionDataTask: NSURLSessionDataTask {
 
             // Persist
             do {
-                let outputPath = ((outputDirectory as NSString).stringByAppendingPathComponent(self.session.cassetteName) as NSString).stringByAppendingPathExtension("json")!
-                let data = try NSJSONSerialization.dataWithJSONObject(cassette.dictionary, options: [.PrettyPrinted])
-                if data.writeToFile(outputPath, atomically: true) {
+                let outputPath = ((outputDirectory as NSString).appendingPathComponent(self.session.cassetteName) as NSString).appendingPathExtension("json")!
+                let data = try JSONSerialization.data(withJSONObject: cassette.dictionary, options: [.prettyPrinted])
+                if (try? data.write(to: URL(fileURLWithPath: outputPath), options: [.atomic])) != nil {
                     fatalError("[DVR] Persisted cassette at \(outputPath). Please add this file to your test target")
                 }
             } catch {
@@ -75,7 +75,7 @@ class SessionDataTask: NSURLSessionDataTask {
             }
 
 			fatalError("[DVR] Failed to persist cassette.")
-        }
+        }) 
         task.resume()
     }
 }

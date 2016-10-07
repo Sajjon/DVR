@@ -1,29 +1,36 @@
 import Foundation
 
 struct Interaction {
-    let request: NSURLRequest
-    let response: NSURLResponse
-    let responseData: NSData?
-    let recordedAt: NSDate
+    let request: URLRequest
+    let response: Foundation.URLResponse
+    let responseData: Data?
+    let recordedAt: Date
 
-    init(request: NSURLRequest, response: NSURLResponse, responseData: NSData? = nil, recordedAt: NSDate = NSDate()) {
+    init(request: URLRequest, response: Foundation.URLResponse, responseData: Data? = nil, recordedAt: Date = Date()) {
         self.request = request
         self.response = response
         self.responseData = responseData
         self.recordedAt = recordedAt
     }
+    
+    init(response: Foundation.URLResponse, responseData: Data? = nil, recordedAt: Date = Date()) {
+        guard let url = URL(string: "/") else { fatalError("no url") }
+        let urlRequest = URLRequest(url: url)
+        self.init(request: urlRequest, response: response, responseData: responseData, recordedAt: recordedAt)
+    }
+    
 }
 
 extension Interaction {
     
-    var dictionary: [String: AnyObject] {
-        var dictionary: [String: AnyObject] = [
+    var dictionary: [String: Any] {
+        var dictionary: [String: Any] = [
             "request": request.dictionary,
             "recorded_at": recordedAt.timeIntervalSince1970
         ]
         
         var contentType: String?
-        if let httpResponse = self.response as? NSHTTPURLResponse {
+        if let httpResponse = self.response as? HTTPURLResponse {
             contentType = httpResponse.allHeaderFields["Content-Type"] as? String
         }
         
@@ -38,17 +45,20 @@ extension Interaction {
         return dictionary
     }
 
-    init?(dictionary: [String: AnyObject]) {
-        guard let request = dictionary["request"] as? [String: AnyObject],
-            response = dictionary["response"] as? [String: AnyObject],
-            recordedAt = dictionary["recorded_at"] as? Int else { return nil }
+    init?(dictionary: [String: Any]) {
+        guard let requestDictionary = dictionary["request"] as? [String: Any],
+            let responseDictionary = dictionary["response"] as? [String: Any],
+            let recordedAt = dictionary["recorded_at"] as? Int,
+            let request = URLRequest(dictionary: requestDictionary),
+            let response = HTTPURLResponse(dictionary: responseDictionary)
+            else { return nil }
 
-        self.request = NSMutableURLRequest(dictionary: request)
-        self.response = URLHTTPResponse(dictionary: response)
-        self.recordedAt = NSDate(timeIntervalSince1970: NSTimeInterval(recordedAt))
+        self.request = request
+        self.response = response
+        self.recordedAt = Date(timeIntervalSince1970: TimeInterval(recordedAt))
 
-        if let body = response["body"] {
-            let formatString = response["body_format"] as? String ?? ""
+        if let body = responseDictionary["body"] {
+            let formatString = responseDictionary["body_format"] as? String ?? ""
             let format = SerializationFormat(rawValue: formatString) ?? .Base64String
             self.responseData = DataSerialization.deserializeBodyData(format, object: body)
         } else {

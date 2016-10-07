@@ -10,14 +10,12 @@ import XCTest
 @testable
 import DVR
 
-extension URLHTTPResponse {
+extension HTTPURLResponse {
     
-    class func createWithContentType(contentType: String) -> URLHTTPResponse {
-        let response = URLHTTPResponse()
-        var headers = response.allHeaderFields
-        headers["Content-Type"] = contentType
-        response.allHeaderFields = headers
-        return response
+    convenience init?(contentType: String) {
+        let headers: [String: String] = ["Content-Type" : contentType]
+        let dict: [String: Any] = ["headers" : headers]
+        self.init(dictionary: dict)
     }
 }
 
@@ -28,9 +26,9 @@ class ResponseTests: XCTestCase {
         let object: NSDictionary = [
             "testing": "rules"
         ]
-        let data = try! NSJSONSerialization.dataWithJSONObject(object, options: [])
-        let response = URLHTTPResponse.createWithContentType("application/json")
-        let interaction = Interaction(request: NSURLRequest(), response: response, responseData: data)
+        let data = try! JSONSerialization.data(withJSONObject: object, options: [])
+        guard let response = HTTPURLResponse(contentType: "application/json") else { XCTFail(); return }
+        let interaction = Interaction(response: response, responseData: data)
         
         let dictionary = interaction.dictionary["response"] as! NSDictionary
         XCTAssertNotNil(dictionary["body"])
@@ -42,9 +40,10 @@ class ResponseTests: XCTestCase {
     func testDataSerialization_PlainText() {
         
         let object: String = "testing_rules"
-        let data = object.dataUsingEncoding(NSUTF8StringEncoding)!
-        let response = URLHTTPResponse.createWithContentType("text/plain")
-        let interaction = Interaction(request: NSURLRequest(), response: response, responseData: data)
+        let data = object.data(using: String.Encoding.utf8)!
+        
+        guard let response = HTTPURLResponse(contentType: "text/plain") else { XCTFail(); return }
+        let interaction = Interaction(response: response, responseData: data)
         
         let dictionary = interaction.dictionary["response"] as! NSDictionary
         XCTAssertNotNil(dictionary["body"])
@@ -56,11 +55,12 @@ class ResponseTests: XCTestCase {
     func testDataSerialization_Base64() {
         
         let object: String = "testing_rules"
-        let data = object.dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64String = data.base64EncodedStringWithOptions([])
+        let data = object.data(using: String.Encoding.utf8)!
+        let base64String = data.base64EncodedString(options: [])
         
-        let response = URLHTTPResponse.createWithContentType("application/octet-stream")
-        let interaction = Interaction(request: NSURLRequest(), response: response, responseData: data)
+        
+        guard let response = HTTPURLResponse(contentType: "application/octet-stream") else { XCTFail(); return }
+        let interaction = Interaction(response: response, responseData: data)
         
         let dictionary = interaction.dictionary["response"] as! NSDictionary
         XCTAssertNotNil(dictionary["body"])
@@ -76,18 +76,18 @@ class ResponseTests: XCTestCase {
         ]
         let response: [String: AnyObject] = [
             "body": json,
-            "body_format": SerializationFormat.JSON.rawValue
+            "body_format": SerializationFormat.JSON.rawValue as AnyObject
         ]
         
         let dictionary: [String: AnyObject] = [
-            "request": [String: AnyObject](),
-            "recorded_at": 12345,
-            "response": response
+            "request": [String: AnyObject]() as AnyObject,
+            "recorded_at": 12345 as AnyObject,
+            "response": response as AnyObject
         ]
         
         let interaction = Interaction(dictionary: dictionary)!
         let data = interaction.responseData!
-        let parsed = try! NSJSONSerialization.JSONObjectWithData(data, options: [.AllowFragments]) as! NSDictionary
+        let parsed = try! JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as! NSDictionary
         XCTAssertEqual(json, parsed)
     }
     
@@ -95,65 +95,65 @@ class ResponseTests: XCTestCase {
         
         let string = "testing_rules?"
         let response: [String: AnyObject] = [
-            "body": string,
-            "body_format": SerializationFormat.PlainText.rawValue
+            "body": string as AnyObject,
+            "body_format": SerializationFormat.PlainText.rawValue as AnyObject
         ]
         
         let dictionary: [String: AnyObject] = [
-            "request": [String: AnyObject](),
-            "recorded_at": 12345,
-            "response": response
+            "request": [String: AnyObject]() as AnyObject,
+            "recorded_at": 12345 as AnyObject,
+            "response": response as AnyObject
         ]
         
         let interaction = Interaction(dictionary: dictionary)!
         let responseData = interaction.responseData!
         
-        let parsed = NSString(data: responseData, encoding: NSUTF8StringEncoding)!
+        let parsed = String(data: responseData, encoding: String.Encoding.utf8)
         XCTAssertEqual(string, parsed)
     }
     
     func testDataDeserialization_Base64() {
         
         let string = "testing_rules?"
-        let data = string.dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64String = data.base64EncodedStringWithOptions([])
-        let response: [String: AnyObject] = [
+        let data = string.data(using: String.Encoding.utf8)!
+        let base64String = data.base64EncodedString()
+        let response: [String: Any] = [
             "body": base64String,
             "body_format": SerializationFormat.Base64String.rawValue
         ]
         
         let dictionary: [String: AnyObject] = [
-            "request": [String: AnyObject](),
-            "recorded_at": 12345,
-            "response": response
+            "request": [String: AnyObject]() as AnyObject,
+            "recorded_at": 12345 as AnyObject,
+            "response": response as AnyObject
         ]
         
         let interaction = Interaction(dictionary: dictionary)!
         let responseData = interaction.responseData!
         
-        let parsed = NSString(data: responseData, encoding: NSUTF8StringEncoding)!
+        let parsed = String(data: responseData, encoding: String.Encoding.utf8)
         XCTAssertEqual(string, parsed)
     }
     
     func testDataDeserialization_defaultsToBase64() {
         
         let string = "no_format_specified, so base64 is assumed!"
-        let data = string.dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64String = data.base64EncodedStringWithOptions([])
-        let response: [String: AnyObject] = [
+        let data = string.data(using: String.Encoding.utf8)!
+        let base64String = data.base64EncodedString(options: [])
+        let response: [String: Any] = [
             "body": base64String
         ]
         
         let dictionary: [String: AnyObject] = [
-            "request": [String: AnyObject](),
-            "recorded_at": 12345,
-            "response": response
+            "request": [String: AnyObject]() as AnyObject,
+            "recorded_at": 12345 as AnyObject,
+            "response": response as AnyObject
         ]
         
         let interaction = Interaction(dictionary: dictionary)!
         let responseData = interaction.responseData!
         
-        let parsed = NSString(data: responseData, encoding: NSUTF8StringEncoding)!
+        let parsed = String(data: responseData, encoding: String.Encoding.utf8)
         XCTAssertEqual(string, parsed)
     }
     

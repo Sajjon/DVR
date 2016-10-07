@@ -1,14 +1,14 @@
 import Foundation
 
-extension NSURLRequest {
-    var dictionary: [String: AnyObject] {
-        var dictionary = [String: AnyObject]()
+extension URLRequest {
+    var dictionary: [String: Any] {
+        var dictionary = [String: Any]()
 
-        if let method = HTTPMethod {
+        if let method = httpMethod {
             dictionary["method"] = method
         }
 
-        if let url = URL?.absoluteString {
+        if let url = url?.absoluteString {
             dictionary["url"] = url
         }
 
@@ -18,7 +18,7 @@ extension NSURLRequest {
             contentType = headers["Content-Type"]
         }
 
-        if let body = HTTPBody {
+        if let body = httpBody {
             let (format, bodyObject) = DataSerialization.serializeBodyData(body, contentType: contentType)
             dictionary["body"] = bodyObject
             dictionary["body_format"] = format.rawValue
@@ -29,16 +29,17 @@ extension NSURLRequest {
 }
 
 
-extension NSMutableURLRequest {
-    convenience init(dictionary: [String: AnyObject]) {
-        self.init()
+extension URLRequest {
+    init?(dictionary: [String: Any]) {
+   
+        let maybeUrlString = dictionary["url"] as? String
+        let urlString = maybeUrlString ?? "/"
+        let url = URL(string: urlString)!
+        
+        self.init(url: url)
 
         if let method = dictionary["method"] as? String {
-            HTTPMethod = method
-        }
-
-        if let string = dictionary["url"] as? String, url = NSURL(string: string) {
-            URL = url
+            httpMethod = method
         }
 
         if let headers = dictionary["headers"] as? [String: String] {
@@ -48,7 +49,7 @@ extension NSMutableURLRequest {
         if let body = dictionary["body"] {
             let formatString = dictionary["body_format"] as? String ?? ""
             let format = SerializationFormat(rawValue: formatString) ?? .Base64String
-            HTTPBody = DataSerialization.deserializeBodyData(format, object: body)
+            httpBody = DataSerialization.deserializeBodyData(format, object: body)
         }
     }
 }
