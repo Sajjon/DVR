@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DVR"
-  s.version      = "0.1"
+  s.version      = "0.1.1"
   s.summary      = "Network testing for Swift"
 
   s.description  = <<-DESC
