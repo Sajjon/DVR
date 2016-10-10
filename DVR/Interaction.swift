@@ -59,7 +59,7 @@ extension Interaction {
 
         if let body = responseDictionary["body"] {
             let formatString = responseDictionary["body_format"] as? String ?? ""
-            let format = SerializationFormat(rawValue: formatString) ?? .Base64String
+            let format = SerializationFormat(rawValue: formatString) ?? .base64String
             self.responseData = DataSerialization.deserializeBodyData(format, object: body)
         } else {
             self.responseData = nil

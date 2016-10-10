@@ -48,7 +48,7 @@ extension URLRequest {
 
         if let body = dictionary["body"] {
             let formatString = dictionary["body_format"] as? String ?? ""
-            let format = SerializationFormat(rawValue: formatString) ?? .Base64String
+            let format = SerializationFormat(rawValue: formatString) ?? .base64String
             httpBody = DataSerialization.deserializeBodyData(format, object: body)
         }
     }
